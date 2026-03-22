@@ -5,7 +5,7 @@ import { initReactI18next, useTranslation } from 'react-i18next';
 export const LANGUAGES = ['ko', 'en'] as const;
 export type Language = (typeof LANGUAGES)[number];
 
-export function useLocale(): Language {
+export function useLanguage(): Language {
   const { i18n: i18nInstance } = useTranslation();
   return i18nInstance.language as Language;
 }
