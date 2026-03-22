@@ -1,201 +1,147 @@
-Welcome to your new TanStack Start app!
+# Template CSR FE
 
-# Getting Started
+GSA InfoTeam CSR(Client-Side Rendering) 프론트엔드 프로젝트 템플릿.
 
-To run this application:
+## Tech Stack
+
+| 분류                   | 라이브러리                            |
+| ---------------------- | ------------------------------------- |
+| 번들러                 | Vite                                  |
+| UI                     | React 19                              |
+| 라우팅                 | TanStack Router (파일 기반)           |
+| 서버 상태              | TanStack Query                        |
+| 스타일                 | Tailwind CSS v4                       |
+| 국제화                 | i18next + react-i18next + i18next-cli |
+| 날짜                   | dayjs                                 |
+| UI 문서                | Storybook                             |
+| 런타임 / 패키지 매니저 | Bun                                   |
+| 린트 / 포맷            | ESLint + Prettier                     |
+| 테스트                 | Vitest                                |
+
+## 시작하기
 
 ```bash
 bun install
-bun --bun run dev
+bun run dev        # 개발 서버 (localhost:3000)
+bun run storybook  # Storybook (localhost:6006)
 ```
 
-# Building For Production
+## 주요 스크립트
 
-To build this application for production:
+| 명령                | 설명                             |
+| ------------------- | -------------------------------- |
+| `bun run dev`       | 개발 서버 실행                   |
+| `bun run build`     | 프로덕션 빌드                    |
+| `bun run preview`   | 빌드 결과 미리보기               |
+| `bun run storybook` | Storybook 실행                   |
+| `bun run lint`      | ESLint 검사                      |
+| `bun run check`     | Prettier 포맷 + ESLint 자동 수정 |
+| `bun run test`      | 단위 테스트                      |
+| `bun run gen:api`   | OpenAPI 스키마 → 타입 생성       |
+| `bun run gen:i18n`  | i18n 키 추출 + 타입 생성         |
+
+## 프로젝트 구조
+
+```text
+src/
+├── routes/          # TanStack Router 파일 기반 라우트
+├── features/        # 도메인별 피처 모듈
+│   └── <feature>/
+│       ├── models/       # 데이터 모델, API 타입
+│       ├── viewmodels/   # 비즈니스 로직, 쿼리/훅
+│       ├── views/        # UI 컴포넌트, 페이지
+│       └── index.ts      # 공개 API
+└── common/          # 피처 공통 코드
+    ├── components/  # 재사용 UI 컴포넌트
+    ├── lib/         # 라이브러리 설정 (api, dayjs, i18n)
+    ├── utils/       # 유틸리티 함수
+    └── const/       # 공통 상수
+```
+
+### 레이어 규칙 (MVVM)
+
+```text
+View → ViewModel → Model
+```
+
+- View는 Model에 직접 접근할 수 없습니다.
+- ViewModel은 View(UI)를 참조할 수 없습니다.
+- Model은 최하위 계층으로 ViewModel·View를 참조할 수 없습니다.
+
+ESLint(`eslint-plugin-boundaries`)로 강제됩니다.
+
+## 네이밍 컨벤션
+
+- `src/` 하위 모든 파일·폴더는 **kebab-case** 사용
+- 단, `src/routes/`는 TanStack Router 파일명 규칙을 따름 (`$id.tsx`, `_layout.tsx` 등)
+
+## Storybook
+
+- **다크 / 라이트 모드**: 툴바(🌙)에서 전환. `data-theme` 어트리뷰트로 제어되며 Tailwind `dark:` variant와 연동됩니다.
+- **언어(i18n)**: 툴바(🌐)에서 `한국어` / `English` 전환. dayjs 로케일이 i18n과 자동으로 동기화됩니다.
+
+## 국제화 (i18n)
+
+[i18next-cli](https://github.com/i18next/i18next-cli)로 번역 키 추출과 타입 생성을 자동화합니다.
+
+`bun run gen:i18n`을 실행하면 (`bun run build` 시 자동 포함) 내부적으로 두 단계를 순서대로 실행합니다.
 
 ```bash
-bun --bun run build
+i18next-cli extract   # 소스에서 번역 키 추출 → public/locales/{lang}/{ns}.json
+i18next-cli types     # 번역 파일 → src/@types/i18next.d.ts, resources.d.ts
 ```
 
-## Testing
+### 규칙
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+- **기본 네임스페이스**: `_` (변경 시 `i18next.config.ts`와 `src/common/lib/i18n.ts` 모두 수정)
+- **네임스페이스 구분자**: `:` (예: `t('auth:login.title')`)
+- **키 구분자**: `.`
+- **기본 언어**: `ko` (Primary) / `en` (Secondary)
+- 사용하지 않는 키는 자동 삭제됩니다 (`removeUnusedKeys: true`).
+- 번역 파일 경로: `public/locales/{language}/{namespace}.json`
+
+### 번역 추가 방법
+
+소스에서 `t()` / `useTranslation()` / `<Trans>` 로 키를 사용한 뒤 `bun run gen:i18n`을 실행하면 `public/locales/ko/_.json`에 빈 값으로 키가 추가됩니다. 이후 각 언어 파일에 번역 값을 채웁니다.
+
+```tsx
+const { t } = useTranslation();
+t('greeting.hello');        // 기본 네임스페이스(_)
+t('auth:login.title');      // auth 네임스페이스
+```
+
+## API 타입 생성
+
+[openapi-typescript](https://github.com/openapi-ts/openapi-typescript)로 Swagger/OpenAPI 스키마에서 TypeScript 타입을 생성합니다.
+
+`bun run gen:api`를 실행하면 (`bun run build` 시 자동 포함) 환경 변수에 설정한 Swagger 엔드포인트에서 스키마를 받아 `src/@types/api-schema.ts`를 생성합니다.
+
+필요한 환경 변수:
+
+| 변수 | 설명 |
+| --- | --- |
+| `SWAGGER_URL` | Swagger JSON / YAML 파일 URL |
+| `SWAGGER_USER` | Basic Auth 사용자명 |
+| `SWAGGER_PASSWORD` | Basic Auth 비밀번호 |
+
+### 사용 규칙
+
+생성된 `api-schema.ts`의 타입은 **직접 import하지 않습니다.**
+
+```ts
+// ❌ 금지
+import type { components } from '@/@types/api-schema';
+
+// ✅ 허용 — feature model 또는 src/common/lib/api.ts 내부에서만
+import type { components } from '@/@types/api-schema';
+```
+
+각 피처의 `models/index.ts`에서 필요한 타입만 가공·재export하고, 다른 레이어는 그 타입을 사용합니다.
+
+## 환경 변수
+
+`.env.example`을 복사해 `.env.local`을 생성하세요.
 
 ```bash
-bun --bun run test
+cp .env.example .env.local
 ```
-
-## Styling
-
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
-
-### Removing Tailwind CSS
-
-If you prefer not to use Tailwind CSS:
-
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `bun install @tailwindcss/vite tailwindcss -D`
-
-## Linting & Formatting
-
-This project uses [eslint](https://eslint.org/) and [prettier](https://prettier.io/) for linting and formatting. Eslint is configured using [tanstack/eslint-config](https://tanstack.com/config/latest/docs/eslint). The following scripts are available:
-
-```bash
-bun --bun run lint
-bun --bun run format
-bun --bun run check
-```
-
-## Routing
-
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from '@tanstack/react-router';
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router';
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-});
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from '@tanstack/react-start';
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString();
-});
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('');
-
-  useEffect(() => {
-    getServerTime().then(setTime);
-  }, []);
-
-  return <div>Server time: {time}</div>;
-}
-```
-
-## API Routes
-
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router';
-import { json } from '@tanstack/react-start';
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-});
-```
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router';
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people');
-    return response.json();
-  },
-  component: PeopleComponent,
-});
-
-function PeopleComponent() {
-  const data = Route.useLoaderData();
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  );
-}
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
