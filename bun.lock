@@ -27,6 +27,7 @@
       },
       "devDependencies": {
         "@eslint/js": "^10.0.1",
+        "@storybook/addon-themes": "^10.3.1",
         "@tailwindcss/typography": "^0.5.16",
         "@tanstack/eslint-config": "latest",
         "@tanstack/eslint-plugin-router": "^1.161.6",
@@ -345,6 +346,8 @@
     "@solid-primitives/static-store": ["@solid-primitives/static-store@0.1.3", "", { "dependencies": { "@solid-primitives/utils": "^6.4.0" }, "peerDependencies": { "solid-js": "^1.6.12" } }, "sha512-uxez7SXnr5GiRnzqO2IEDjOJRIXaG+0LZLBizmUA1FwSi+hrpuMzVBwyk70m4prcl8X6FDDXUl9O8hSq8wHbBQ=="],
 
     "@solid-primitives/utils": ["@solid-primitives/utils@6.4.0", "", { "peerDependencies": { "solid-js": "^1.6.12" } }, "sha512-AeGTBg8Wtkh/0s+evyLtP8piQoS4wyqqQaAFs2HJcFMMjYAtUgo+ZPduRXLjPlqKVc2ejeR544oeqpbn8Egn8A=="],
+
+    "@storybook/addon-themes": ["@storybook/addon-themes@10.3.1", "", { "dependencies": { "ts-dedent": "^2.0.0" }, "peerDependencies": { "storybook": "^10.3.1" } }, "sha512-Y4ZCof3C+nsXvfhDmUvxt1klnZ6SPh1tLuDWo4eE8MUG1jQ2tixiIQX6Ups8fqfYCN8RgjcDDHnIyNZRZlgB2Q=="],
 
     "@storybook/builder-vite": ["@storybook/builder-vite@10.3.1", "", { "dependencies": { "@storybook/csf-plugin": "10.3.1", "ts-dedent": "^2.0.0" }, "peerDependencies": { "storybook": "^10.3.1", "vite": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0" } }, "sha512-8X3Mv6VxVaVHip51ZuTAjQv7jI3K4GxpgW0ZAhaLi8atSTHezu7hQOuISC1cHAwhMV0GhGHtCCKi33G9EGx5hw=="],
 
