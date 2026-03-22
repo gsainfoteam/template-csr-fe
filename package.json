@@ -7,14 +7,16 @@
   },
   "scripts": {
     "dev": "vite dev --port 3000",
-    "build": "vite build",
-    "preview": "vite preview",
+    "build": "bun run gen:api && bun run gen:i18n && tsr generate && tsc && vite build",
+    "preview": "bun run build && vite preview",
     "test": "vitest run",
     "lint": "eslint",
     "format": "prettier --check .",
     "check": "prettier --write . && eslint --fix",
     "storybook": "storybook dev -p 6006",
-    "i18n": "i18next-cli"
+    "i18n": "i18next-cli",
+    "gen:api": "bun run scripts/gen-api.ts",
+    "gen:i18n": "i18next-cli extract && i18next-cli types"
   },
   "dependencies": {
     "@storybook/react-vite": "^10.2.15",
