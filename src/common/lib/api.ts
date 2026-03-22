@@ -16,7 +16,7 @@ import createQueryClient from 'openapi-react-query';
 // };
 
 export const api = createFetchClient({
-  baseUrl: import.meta.env.VITE_API_BASE_URL,
+  baseUrl: import.meta.env.DEV ? '/api' : import.meta.env.VITE_API_BASE_URL,
   credentials: 'include',
 });
 // api.use(middleware);
