@@ -146,3 +146,19 @@ import type { components } from '@/@types/api-schema';
 ```bash
 cp .env.example .env.local
 ```
+
+## GitHub Branch Ruleset
+
+`.github/ruleset.json`에 기본 브랜치 보호 규칙이 정의되어 있습니다. 이 템플릿을 사용하는 레포에서는 해당 룰셋을 import해야 합니다.
+
+**적용 방법**: GitHub 레포 → Settings → Rules → Rulesets → **Import a ruleset** → `.github/ruleset.json` 선택
+
+적용되는 규칙:
+
+| 규칙               | 설명                                                                                     |
+| ------------------ | ---------------------------------------------------------------------------------------- |
+| 브랜치 삭제 금지   | 기본 브랜치 삭제 불가                                                                    |
+| Force push 금지    | non-fast-forward push 불가                                                               |
+| 선형 히스토리 필수 | squash merge만 허용                                                                      |
+| PR 필수            | 승인 2명, stale review 자동 해제, 마지막 push 후 재승인 필요, 모든 리뷰 스레드 해결 필수 |
+| 상태 체크 필수     | `check-version` CI 통과 필요                                                             |
