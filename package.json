@@ -19,6 +19,7 @@
     "gen:i18n": "i18next-cli extract && i18next-cli types"
   },
   "dependencies": {
+    "@amplitude/analytics-browser": "^2.37.0",
     "@storybook/react-vite": "^10.2.15",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-devtools": "latest",
