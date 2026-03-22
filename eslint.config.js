@@ -153,7 +153,7 @@ export default defineConfig(
           ],
         },
       ],
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'react-refresh/only-export-components': 'off',
       '@typescript-eslint/no-namespace': 'off',
       '@typescript-eslint/no-empty-object-type': 'off',
     },
