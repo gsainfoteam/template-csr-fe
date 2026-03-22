@@ -13,7 +13,8 @@
     "storybook": "storybook dev -p 6006",
     "i18n": "i18next-cli",
     "gen:api": "bun run scripts/gen-api.ts",
-    "gen:i18n": "i18next-cli extract && i18next-cli types"
+    "gen:i18n": "i18next-cli extract && i18next-cli types",
+    "gen:i18n:watch": "i18next-cli extract --watch & i18next-cli types --watch & wait"
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^2.37.0",

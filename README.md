@@ -28,17 +28,18 @@ bun run storybook  # Storybook (localhost:6006)
 
 ## 주요 스크립트
 
-| 명령                | 설명                             |
-| ------------------- | -------------------------------- |
-| `bun run dev`       | 개발 서버 실행                   |
-| `bun run build`     | 프로덕션 빌드                    |
-| `bun run preview`   | 빌드 결과 미리보기               |
-| `bun run storybook` | Storybook 실행                   |
-| `bun run lint`      | ESLint 검사                      |
-| `bun run check`     | Prettier 포맷 + ESLint 자동 수정 |
-| `bun run test`      | 단위 테스트                      |
-| `bun run gen:api`   | OpenAPI 스키마 → 타입 생성       |
-| `bun run gen:i18n`  | i18n 키 추출 + 타입 생성         |
+| 명령                     | 설명                             |
+| ------------------------ | -------------------------------- |
+| `bun run dev`            | 개발 서버 실행                   |
+| `bun run build`          | 프로덕션 빌드                    |
+| `bun run preview`        | 빌드 결과 미리보기               |
+| `bun run storybook`      | Storybook 실행                   |
+| `bun run lint`           | ESLint 검사                      |
+| `bun run check`          | Prettier 포맷 + ESLint 자동 수정 |
+| `bun run test`           | 단위 테스트                      |
+| `bun run gen:api`        | OpenAPI 스키마 → 타입 생성       |
+| `bun run gen:i18n`       | i18n 키 추출 + 타입 생성         |
+| `bun run gen:i18n:watch` | i18n 키 추출 + 타입 생성 (watch) |
 
 ## 프로젝트 구조
 
