@@ -13,3 +13,5 @@ __unconfig*
 todos.json
 
 src/routeTree.gen.ts
+src/@types/*.ts
+!src/@types/string.d.ts
