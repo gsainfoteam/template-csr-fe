@@ -22,7 +22,7 @@ GSA Infoteam CSR(Client-Side Rendering) 프론트엔드 프로젝트 템플릿.
 
 ```bash
 bun install
-bun run dev        # 개발 서버 (localhost:3000)
+bun run dev        # 개발 서버 (localhost:5173)
 bun run storybook  # Storybook (localhost:6006)
 ```
 
