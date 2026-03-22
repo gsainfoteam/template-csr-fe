@@ -77,9 +77,23 @@ Split into **`ui/`** (primitives) and other directories (composites/layouts):
 #### Other directories — Composite components
 
 - **`layout/`**: Layout-level wrappers (e.g. page shells, navigation frames).
-- **`shared/`**: Cross-feature composites that may use app context (e.g. links, popovers).
 
 Do **not** put components that use `@/features/*`, `useTranslation`, or feature viewmodels under `ui/`.
+
+### Component Type Conventions
+
+- Use namespace merging for component-related types such as props and state.
+
+```ts
+export function Button({ label, variant }: Button.Props) { ... }
+
+export namespace Button {
+  export type Props = {
+    label: string;
+    variant?: 'primary' | 'secondary';
+  };
+}
+```
 
 ### Component Folder & Storybook
 
