@@ -28,8 +28,8 @@ jobs:
 
       - name: Compare versions
         run: |
-          PR_VER=${{ steps.pr_version.outputs.version }}
-          MAIN_VER=${{ steps.main_version.outputs.version }}
+          PR_VER="${{ steps.pr_version.outputs.version }}"
+          MAIN_VER="${{ steps.main_version.outputs.version }}"
           echo "PR Version: $PR_VER"
           echo "Main Version: $MAIN_VER"
           if [ "$PR_VER" == "$MAIN_VER" ]; then
