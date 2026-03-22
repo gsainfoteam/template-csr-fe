@@ -14,7 +14,7 @@
     "format": "prettier --check .",
     "check": "prettier --write . && eslint --fix",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "i18n": "i18next-cli"
   },
   "dependencies": {
     "@storybook/react-vite": "^10.2.15",
@@ -25,9 +25,12 @@
     "@tanstack/react-router": "latest",
     "@tanstack/react-router-devtools": "latest",
     "@tanstack/router-plugin": "^1.132.0",
+    "i18next": "^25.10.3",
+    "i18next-http-backend": "^3.0.2",
     "lucide-react": "^0.545.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-i18next": "^16.6.0",
     "storybook": "^10.2.15",
     "tailwindcss": "^4.1.18"
   },
@@ -53,6 +56,7 @@
     "eslint-plugin-storybook": "^10.3.1",
     "eslint-plugin-unused-imports": "^4.4.1",
     "globals": "^17.4.0",
+    "i18next-cli": "^1.50.3",
     "jsdom": "^28.1.0",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
