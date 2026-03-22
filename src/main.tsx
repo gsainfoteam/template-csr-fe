@@ -1,10 +1,14 @@
-import { StrictMode } from 'react'
-import ReactDOM from 'react-dom/client'
-import { createRouter, RouterProvider } from '@tanstack/react-router'
-import './styles.css'
+import { StrictMode } from 'react';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { routeTree } from './routeTree.gen';
+import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+
+import ReactDOM from 'react-dom/client';
+
+import './styles.css';
+
+import { routeTree } from './routeTree.gen';
 
 export const queryClient = new QueryClient();
 
@@ -26,7 +30,7 @@ ReactDOM.createRoot(document.getElementById('app')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
-      {import.meta.env.DEV && <TanStackRouterDevtools router={router} position='bottom-left' />}
+      {import.meta.env.DEV && <TanStackRouterDevtools router={router} position="bottom-left" />}
     </QueryClientProvider>
   </StrictMode>,
-)
+);
