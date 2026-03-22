@@ -57,6 +57,22 @@ async function generateApiSchema() {
       }
     }
 
+    swaggerJson.components.schemas['ErrorDto'] = {
+      type: 'object',
+      properties: {
+        message: {
+          type: 'string',
+        },
+        error: {
+          type: 'string',
+        },
+        statusCode: {
+          type: 'number',
+        },
+      },
+      required: ['message', 'error', 'statusCode'],
+    };
+
     const ast = await openapiTS(swaggerJson, {
       enum: true,
       dedupeEnums: true,
