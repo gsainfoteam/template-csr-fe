@@ -1,6 +1,6 @@
 # Template CSR FE
 
-GSA InfoTeam CSR(Client-Side Rendering) 프론트엔드 프로젝트 템플릿.
+GSA Infoteam CSR(Client-Side Rendering) 프론트엔드 프로젝트 템플릿.
 
 ## Tech Stack
 
