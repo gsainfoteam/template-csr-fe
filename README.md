@@ -106,8 +106,8 @@ i18next-cli types     # 번역 파일 → src/@types/i18next.d.ts, resources.d.t
 
 ```tsx
 const { t } = useTranslation();
-t('greeting.hello');        // 기본 네임스페이스(_)
-t('auth:login.title');      // auth 네임스페이스
+t('greeting.hello'); // 기본 네임스페이스(_)
+t('auth:login.title'); // auth 네임스페이스
 ```
 
 ## API 타입 생성
@@ -118,11 +118,11 @@ t('auth:login.title');      // auth 네임스페이스
 
 필요한 환경 변수:
 
-| 변수 | 설명 |
-| --- | --- |
-| `SWAGGER_URL` | Swagger JSON / YAML 파일 URL |
-| `SWAGGER_USER` | Basic Auth 사용자명 |
-| `SWAGGER_PASSWORD` | Basic Auth 비밀번호 |
+| 변수               | 설명                         |
+| ------------------ | ---------------------------- |
+| `SWAGGER_URL`      | Swagger JSON / YAML 파일 URL |
+| `SWAGGER_USER`     | Basic Auth 사용자명          |
+| `SWAGGER_PASSWORD` | Basic Auth 비밀번호          |
 
 ### 사용 규칙
 
