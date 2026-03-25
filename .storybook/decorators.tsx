@@ -1,8 +1,9 @@
 import type { Decorator } from '@storybook/react-vite';
 import { useEffect } from 'react';
 import { I18nextProvider } from 'react-i18next';
-import '../src/common/lib/dayjs'; // registers i18n ↔ dayjs sync listener
 import { i18n } from '../src/common/lib/i18n';
+
+import '../src/common/lib/dayjs';
 
 export const withLocale: Decorator = (Story, context) => {
   const locale = (context.globals.locale as string) ?? 'ko';
