@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { createRouter, RouterProvider } from '@tanstack/react-router';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { RouterProvider } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
 import ReactDOM from 'react-dom/client';
@@ -12,23 +12,7 @@ import '@/common/lib/dayjs';
 
 import { i18n } from '@/common/lib/i18n';
 
-import { routeTree } from './routeTree.gen';
-
-export const queryClient = new QueryClient();
-
-export const router = createRouter({
-  routeTree,
-  defaultPreload: 'intent',
-  context: {
-    queryClient,
-  },
-});
-
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router;
-  }
-}
+import { queryClient, router } from './router';
 
 ReactDOM.createRoot(document.getElementById('app')!).render(
   <StrictMode>

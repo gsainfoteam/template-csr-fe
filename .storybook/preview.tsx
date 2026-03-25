@@ -1,7 +1,12 @@
 import { withThemeByDataAttribute } from '@storybook/addon-themes';
+
 import type { Preview } from '@storybook/react-vite';
-import '../src/styles.css';
+import { RouterContextProvider } from '@tanstack/react-router';
+import { router } from '../src/router';
+
 import { withLocale } from './decorators';
+
+import '../src/styles.css';
 
 const preview: Preview = {
   globalTypes: {
@@ -38,6 +43,11 @@ const preview: Preview = {
       attributeName: 'data-theme',
     }),
     withLocale,
+    (Story) => (
+      <RouterContextProvider router={router}>
+        <Story />
+      </RouterContextProvider>
+    ),
   ],
 };
 
