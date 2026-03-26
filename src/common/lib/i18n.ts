@@ -10,11 +10,16 @@ export function useLanguage(): Language {
   return i18nInstance.language as Language;
 }
 
+const browserLng = navigator.language.split('-')[0];
+const initialLng: Language = (LANGUAGES as readonly string[]).includes(browserLng)
+  ? (browserLng as Language)
+  : 'ko';
+
 await i18n
   .use(HttpBackend)
   .use(initReactI18next)
   .init({
-    lng: 'ko',
+    lng: initialLng,
     fallbackLng: 'ko',
     defaultNS: '_',
     nsSeparator: ':',
