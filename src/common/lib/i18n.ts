@@ -2,8 +2,7 @@ import i18n from 'i18next';
 import HttpBackend from 'i18next-http-backend';
 import { initReactI18next, useTranslation } from 'react-i18next';
 
-export const LANGUAGES = ['ko', 'en'] as const;
-export type Language = (typeof LANGUAGES)[number];
+import { LANGUAGES, type Language } from './languages';
 
 export function useLanguage(): Language {
   const { i18n: i18nInstance } = useTranslation();
