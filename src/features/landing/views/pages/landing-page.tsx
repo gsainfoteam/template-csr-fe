@@ -47,7 +47,7 @@ export function LandingPage() {
       {/* Hero */}
       <section className="flex flex-col items-center gap-6 px-6 py-24 text-center">
         <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
-          GSA InfoTeam Template
+          GSA Infoteam Template
         </span>
         <h1 className="text-5xl font-bold tracking-tight text-gray-900 dark:text-white">
           {t('landing.hero.title')}
