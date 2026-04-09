@@ -17,6 +17,7 @@
         "clsx": "^2.1.1",
         "dayjs": "^1.11.20",
         "i18next": "^25.10.3",
+        "i18next-browser-languagedetector": "^8.2.1",
         "i18next-http-backend": "^3.0.2",
         "lucide-react": "^0.545.0",
         "openapi-fetch": "^0.17.0",
@@ -966,6 +967,8 @@
     "human-signals": ["human-signals@8.0.1", "", {}, "sha512-eKCa6bwnJhvxj14kZk5NCPc6Hb6BdsU9DZcOnmQKSnO1VKrfV0zCvtttPZUsBvjmNDn8rpcJfpwSYnHBjc95MQ=="],
 
     "i18next": ["i18next@25.10.3", "", { "dependencies": { "@babel/runtime": "^7.29.2" }, "peerDependencies": { "typescript": "^5" }, "optionalPeers": ["typescript"] }, "sha512-9XCjFgF7q4wNdmy7RFcDBIx1ndSXU3QwtbmqPjOdUxYxU9gbovJzZUY5Mb3ejWmDhxMl6Wmr2OenWOU3uyy6VQ=="],
+
+    "i18next-browser-languagedetector": ["i18next-browser-languagedetector@8.2.1", "", { "dependencies": { "@babel/runtime": "^7.23.2" } }, "sha512-bZg8+4bdmaOiApD7N7BPT9W8MLZG+nPTOFlLiJiT8uzKXFjhxw4v2ierCXOwB5sFDMtuA5G4kgYZ0AznZxQ/cw=="],
 
     "i18next-cli": ["i18next-cli@1.50.3", "", { "dependencies": { "@croct/json5-parser": "^0.2.2", "@swc/core": "^1.15.18", "chokidar": "^5.0.0", "commander": "^14.0.3", "execa": "^9.6.1", "glob": "^13.0.6", "i18next-resources-for-ts": "^2.0.2", "inquirer": "^13.3.2", "jiti": "^2.6.1", "jsonc-parser": "^3.3.1", "magic-string": "^0.30.21", "minimatch": "^10.2.4", "ora": "^9.3.0", "react": "^19.2.4", "react-i18next": "^16.5.8", "yaml": "^2.8.2" }, "bin": { "i18next-cli": "dist/esm/cli.js" } }, "sha512-sXyEydTInPfWDGzbGEpSTIrIe0vNl0aLd4qw6lqk+g21CNImZ9t+eTPSkDRRBReBUOdgGC+TS2myqxZmwCPYIA=="],
 
